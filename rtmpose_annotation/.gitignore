@@ -1,0 +1,12 @@
+# Ignore extracted frames
+kick_frames/
+
+# Ignore raw videos
+raw_videos/
+
+# Ignore video/image files everywhere
+*.mp4
+*.avi
+*.mov
+*.png
+*.jpg

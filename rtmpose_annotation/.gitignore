@@ -1,5 +1,9 @@
 # Ignore extracted frames
 kick_frames/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+mmpose/
 
 # Ignore raw videos
 raw_videos/
@@ -10,3 +14,8 @@ raw_videos/
 *.mov
 *.png
 *.jpg
+
+# Environment/IDE
+.vscode/
+.env 
+*.ipynb

@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 mmpose/
+mmdetection/
 
 # Ignore raw videos
 raw_videos/

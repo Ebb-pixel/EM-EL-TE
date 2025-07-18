@@ -19,4 +19,4 @@ raw_videos/
 # Environment/IDE
 .vscode/
 .env 
-*.ipynb
+*.ipynb"rtmpose_annotation/mmdetection/" 

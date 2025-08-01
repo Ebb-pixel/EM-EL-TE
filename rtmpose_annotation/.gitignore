@@ -5,6 +5,7 @@ __pycache__/
 .ipynb_checkpoints/
 mmpose/
 mmdetection/
+web_interface/
 
 # Ignore raw videos
 raw_videos/
@@ -15,6 +16,7 @@ raw_videos/
 *.mov
 *.png
 *.jpg
+*.pth
 
 # Environment/IDE
 .vscode/

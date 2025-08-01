@@ -1,14 +1,11 @@
 import json
 import os
 import random
-from pathlib import Path
 
 # === CONFIG ===
-input_json = 'mmdetection/underwater_person_detection/annotations/instances_default.json'
-output_dir = 'mmdetection/underwater_person_detection/annotations'
-train_ratio = 0.7
-val_ratio = 0.2
-test_ratio = 0.1
+input_json = 'mmdetection/swimmer/annotations/instances_default.json'
+output_dir = 'mmdetection/swimmer/annotations'
+train_ratio = 0.9
 seed = 42
 
 # === LOAD ORIGINAL JSON ===
@@ -19,17 +16,15 @@ images = coco['images']
 annotations = coco['annotations']
 categories = coco['categories']
 
-# === SPLIT IMAGES ===
+# === SHUFFLE & SPLIT IMAGES ===
 random.seed(seed)
 random.shuffle(images)
 
 n_total = len(images)
 n_train = int(n_total * train_ratio)
-n_val = int(n_total * val_ratio)
 
 train_images = images[:n_train]
-val_images = images[n_train:n_train + n_val]
-test_images = images[n_train + n_val:]
+val_images = images[n_train:]
 
 def get_ann_subset(images_subset):
     image_ids = set(img['id'] for img in images_subset)
@@ -38,10 +33,9 @@ def get_ann_subset(images_subset):
 splits = {
     'train': (train_images, get_ann_subset(train_images)),
     'val': (val_images, get_ann_subset(val_images)),
-    'test': (test_images, get_ann_subset(test_images))
 }
 
-# === SAVE SPLIT FILES ===
+# === SAVE SPLITS ===
 os.makedirs(output_dir, exist_ok=True)
 
 for split, (imgs, anns) in splits.items():

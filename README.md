@@ -206,21 +206,4 @@ __pycache__/
 
 ---
 
-## 📌 Future Work
 
-* [ ] Convert to ONNX for deployment
-* [ ] Add real-time video streaming interface
-* [ ] Test on mobile/edge devices
-
-```
-
----
-
-Let me know if you’d like me to:
-
-- Help host your model weights
-- Add example images or visual outputs
-- Customize for a GUI-based inference version
-
-You're ready to copy and paste this into GitHub as your `README.md`. ✅
-```

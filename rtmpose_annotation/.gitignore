@@ -17,6 +17,9 @@ raw_videos/
 *.png
 *.jpg
 *.pth
+*.pth
+*.ckpt
+*.pt
 
 # Environment/IDE
 .vscode/

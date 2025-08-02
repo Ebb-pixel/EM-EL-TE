@@ -1,11 +1,5 @@
 # EM-EL-TE
 
-Absolutely! Below is a **complete `README.md`** that you can copy and paste directly into your GitHub repo.
-
-It reflects your setup using **RTMDet + RTMPose**, and assumes that model weights (`.pth` files) are hosted externally (you can update those links later):
-
----
-
 ````markdown
 # 🏊 Underwater Swimmer Pose Estimation using RTMDet + RTMPose
 
@@ -138,17 +132,6 @@ python tools/test.py configs/underwater/rtmpose-l_underwater.py \
     --eval bbox keypoints
 ```
 
----
-
-## 📈 Results
-
-| Model     | AP (Validation) | Notes                  |
-| --------- | --------------- | ---------------------- |
-| RTMPose-L | \~0.998         | High accuracy, heavier |
-| RTMPose-M | TBD             | Lighter, faster        |
-
----
-
 ## 🧠 Dataset Format
 
 * **COCO-style JSON** with:
@@ -156,47 +139,7 @@ python tools/test.py configs/underwater/rtmpose-l_underwater.py \
   * `images`
   * `annotations` (bounding boxes + keypoints)
   * `categories` (including `keypoints` and `skeleton`)
-* Empty frames (no annotations) included to improve robustness
-
----
-
-## 🚫 Checkpoints Not Included
-
-Model weights (`.pth` files) are not tracked in this repo due to GitHub size limits.
-
-### 🔗 Download Pretrained Weights:
-
-* RTMDet Checkpoint: [Download RTMDet](https://your-link.com)
-* RTMPose Checkpoint: [Download RTMPose](https://your-link.com)
-
-> Replace the above links with your actual Google Drive / Hugging Face links.
-
----
-
-## 📦 Optional Streamlit GUI
-
-If you’ve built a `streamlit_app.py`, you can run:
-
-```bash
-streamlit run streamlit_app.py
-```
-
-> NOTE: The `web_interface/` folder is ignored in Git due to size.
-
----
-
-## 🧾 .gitignore Highlights
-
-```gitignore
-*.pth
-*.mp4
-*.avi
-*.mov
-web_interface/
-__pycache__/
-```
-
----
+* Empty frames (no annotations) included to improve robustness.
 
 ## 🙏 Acknowledgments
 

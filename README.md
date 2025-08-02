@@ -97,23 +97,6 @@ python tools/train.py configs/underwater/rtmpose-m_underwater.py \
     --work-dir work_dirs/rtmpose-m_underwater
 ```
 
----
-
-## 🎯 Inference
-
-Run full pipeline inference using both detector and pose estimator:
-
-```bash
-python custom_underwater_video_pose_inference.py \
-    --det-config configs/rtmdet_underwater/rtmdet_tiny_1class_underwater.py \
-    --det-checkpoint path/to/rtmdet.pth \
-    --pose-config configs/underwater/rtmpose-l_underwater.py \
-    --pose-checkpoint path/to/rtmpose.pth \
-    --input path/to/your_video_or_images \
-    --output output/dir \
-    --smooth
-```
-
 ### ✅ Features:
 
 * Temporal smoothing with sliding-window average

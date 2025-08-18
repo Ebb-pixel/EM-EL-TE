@@ -1,145 +1,179 @@
 # 🏊‍♂️ Underwater Swimmer Pose Estimation  
 
-![Python](https://img.shields.io/badge/Python-3.9-blue.svg)  
-![Framework](https://img.shields.io/badge/OpenMMLab-MMPose%20%7C%20MMDetection-green)  
-![Torch](https://img.shields.io/badge/PyTorch-2.0-red)  
+This project implements a **two-stage pipeline** for underwater swimmer analysis using **RTMDet** (detection) and **RTMPose** (pose estimation).  
 
-A two-stage pipeline for **underwater swimmer pose estimation**:  
-
-1. **Detection** – An `RTMDet` model detects the swimmer in each frame.  
-2. **Pose Estimation** – The cropped bounding box is passed to an `RTMPose` model to predict keypoints.  
-
-Outputs:  
-- 🎥 Annotated video with skeleton overlay.  
-- 📄 JSON file containing keypoint coordinates per frame.  
+1. **Detection (RTMDet):** Locates the swimmer in each frame.  
+2. **Pose Estimation (RTMPose):** Predicts keypoints from the detected bounding box.  
+3. **Output:** Annotated video + JSON file with keypoints for downstream analysis.  
 
 ---
 
-## 📂 Repository Structure
+## 📂 Repository Structure  
 
-rtmpose_annotation/
-│
-├── training/ # Training configs
-│ └── configs/
-│ ├── rtmdet_underwater/
-│ │ └── rtmdet_tiny_1class_underwater.py
-│ └── underwater/
-│ ├── rtmpose-l_underwater.py
-│ └── rtmpose-m_underwater.py
-│
-├── inference/ # Inference scripts
-│ ├── configs/ # Flattened configs for standalone inference
-│ │ ├── rtmdet_tiny_infer_flat.py
-│ │ └── rtmpose-l_infer_flat.py
-│ ├── custom_inference.py # CLI inference
-│ ├── gui_inference.py # GUI inference (file chooser + progress)
-│ └── tools/
-│ └── prepare_inference_configs.py
-│
-├── Dataset_split_script/ # Dataset preparation helpers
-│ ├── split_coco_person_detection.py
-│ └── split_data.py
-│
-└── .gitignore
+```
 
+rtmpose\_annotation/
+│── training/              # Training configs for RTMDet & RTMPose
+│   └── configs/
+│       ├── rtmdet\_underwater/
+│       │   └── rtmdet\_tiny\_1class\_underwater.py
+│       └── underwater/
+│           ├── rtmpose-l\_underwater.py
+│           └── rtmpose-m\_underwater.py
+│
+│── inference/             # Inference scripts & configs
+│   ├── custom\_inference.py
+│   ├── gui\_inference.py
+│   ├── configs/
+│   │   ├── rtmdet\_tiny\_infer\_flat.py
+│   │   └── rtmpose-l\_infer\_flat.py
+│   └── tools/
+│       └── prepare\_inference\_configs.py
+│
+│── Dataset\_split\_script/  # Dataset preparation utilities
+│   ├── split\_coco\_person\_detection.py
+│   └── split\_data.py
+
+````
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation  
+
+We use **MMPose** and **MMDetection** as the backbone.  
+Clone this repo along with official MMPose and MMDetection to ensure configs work properly.  
 
 ```bash
-# 1. Create conda env
+# Create conda env
 conda create -n mmpose python=3.9 -y
 conda activate mmpose
 
-# 2. Install PyTorch (adjust CUDA version if needed)
+# Install PyTorch (check CUDA version at pytorch.org)
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
-# 3. Clone and install MMDetection
-git clone https://github.com/open-mmlab/mmdetection.git
-cd mmdetection
-pip install -e .
-cd ..
+# Install mmcv
+pip install -U openmim
+mim install mmcv==2.0.1
 
-# 4. Clone and install MMPose
+# Clone MMPose & MMDetection
 git clone https://github.com/open-mmlab/mmpose.git
+git clone https://github.com/open-mmlab/mmdetection.git
+
+# Install both
 cd mmpose
 pip install -e .
-cd ..
+cd ../mmdetection
+pip install -e .
+````
 
-# 5. Extra requirements
-pip install -r requirements.txt
+---
 
-📌 Config Inheritance ⚠️
+## 🚀 Training
 
-The training configs here (e.g. rtmpose-l_underwater.py) inherit from _base_ configs inside the official repos (mmpose/configs and mmdetection/configs).
+Run training for **detection** or **pose estimation**.
 
-That means:
-
-✅ You MUST clone MMPose and MMDetection repos.
-
-❌ If you only copy configs without repos, training will fail with:
-
-FileNotFoundError: Cannot find config file: ../_base_/models/...
-
-🚀 Training
-1️⃣ Train RTMDet (Swimmer Detector)
-
+```bash
+# Example: Train RTMDet on underwater dataset
 python tools/train.py training/configs/rtmdet_underwater/rtmdet_tiny_1class_underwater.py
 
-2️⃣ Train RTMPose (Pose Estimator)
-
+# Example: Train RTMPose on underwater dataset
 python tools/train.py training/configs/underwater/rtmpose-l_underwater.py
+```
 
-Checkpoints and logs → work_dirs/.
+> ⚠️ **Important**: Training configs inherit from `_base_` configs inside MMPose & MMDetection.
+> That’s why cloning those repos is required.
 
-🎯 Inference
-🔹 CLI Inference
+---
 
+## 🎯 Inference
+
+We provide **two inference options**:
+
+### 1. CLI Inference
+
+```bash
 python inference/custom_inference.py --input path/to/video.mp4 --device cuda
+```
+
+Arguments:
+
+* `--input` : path to input video
+* `--device` : `cpu` or `cuda`
 
 Outputs:
 
-output/result.mp4 – annotated video
+* Annotated video (`output_with_keypoints.mp4`)
+* JSON file (`keypoints.json`)
 
-output/keypoints.json – keypoint coordinates
+---
 
-🔹 GUI Inference
+### 2. GUI Inference
 
-For end-users (double-click .exe or run Python):
+Run:
 
-File chooser opens to select video.
-
-Progress bar shows during processing.
-
-Notification when inference is done.
-
+```bash
 python inference/gui_inference.py
+```
 
-📊 Dataset Preparation
+This opens a file chooser to select your video.
+Progress is displayed in a GUI window, and a message notifies when inference is complete.
 
-Use provided scripts:
+---
 
-# Split into train / val / test
+## 📊 Dataset Preparation
+
+Use our helper scripts:
+
+```bash
+# Split dataset into train/val
 python Dataset_split_script/split_data.py
 
-# Filter COCO person annotations
+# Convert COCO dataset for person detection
 python Dataset_split_script/split_coco_person_detection.py
+```
 
-📝 Notes
+---
 
-Detector: RTMDet-Tiny (1-class swimmer).
+## 📈 Example Output JSON
 
-Pose Estimator: RTMPose-L (custom-trained).
+Each frame stores the detected keypoints:
 
-Outputs: video + JSON.
+```json
+{
+  "frame_id": 12,
+  "keypoints": [
+    [320.5, 140.2, 0.98], 
+    [330.1, 200.7, 0.95], 
+    [310.9, 250.3, 0.92]
+  ]
+}
+```
 
-For client delivery: packaged as PyInstaller .exe (gui_inference.py).
+Where each entry is `[x, y, confidence]`.
 
-🙌 Credits
+---
 
-MMPose
+## 🔗 Pipeline Overview
 
-MMDetection
+```
+Video Input
+     │
+     ▼
+ [ RTMDet ]  --->  Bounding Box
+     │
+     ▼
+ [ RTMPose ] --->  Keypoints
+     │
+     ├──▶ Annotated Video
+     └──▶ JSON Keypoints
+```
 
-Dataset collected & annotated for this project - Aquatics GB
+---
+
+## 🙏 Credits
+
+* [MMPose](https://github.com/open-mmlab/mmpose)
+* [MMDetection](https://github.com/open-mmlab/mmdetection)
+* OpenMMLab team for the toolkits
+
+```

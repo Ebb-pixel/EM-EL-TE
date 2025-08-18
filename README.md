@@ -180,6 +180,3 @@ Video Input
 * [MMDetection](https://github.com/open-mmlab/mmdetection)
 * OpenMMLab team for the toolkits
 * Dataset acquired from Aquatics GB
-
-```
----

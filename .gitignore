@@ -1,0 +1,76 @@
+# ========================
+# Global ignores
+# ========================
+__pycache__/
+*.py[cod]
+*.so
+*.dll
+*.dylib
+*.class
+*.log
+*.tmp
+*.swp
+*.bak
+*.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Jupyter & notebooks
+.ipynb_checkpoints/
+*.ipynb_convert/
+*.ipynb_checkpoints
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+*.egg-info/
+.eggs/
+
+# Build / dist outputs
+build/
+dist/
+*.spec
+kick_frames/
+mmdetection/
+mmpose/
+web_interface/
+raw_videos/
+
+# Model weights & big artifacts
+*.pth
+*.pt
+*.onnx
+*.ckpt
+*.weights
+*.tar
+*.gz
+*.zip
+
+# Videos, images, outputs
+*.avi
+*.mp4
+*.mov
+*.mkv
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.gif
+*.tif
+*.tiff
+*.json
+
+# ========================
+# Project specific
+# ========================
+# Ignore everything in rtmpose_annotation
+rtmpose_annotation/*
+
+# But keep training and inference
+!rtmpose_annotation/
+!rtmpose_annotation/training/
+!rtmpose_annotation/inference/
+!rtmpose_annotation/Dataset_split_script/
+

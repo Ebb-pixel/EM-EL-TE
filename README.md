@@ -1,5 +1,9 @@
 # 🏊‍♂️ Underwater Swimmer Pose Estimation  
 
+![Python](https://img.shields.io/badge/Python-3.9-blue.svg)  
+![Framework](https://img.shields.io/badge/OpenMMLab-MMPose%20%7C%20MMDetection-green)  
+![Torch](https://img.shields.io/badge/PyTorch-2.0-red) 
+
 This project implements a **two-stage pipeline** for underwater swimmer analysis using **RTMDet** (detection) and **RTMPose** (pose estimation).  
 
 1. **Detection (RTMDet):** Locates the swimmer in each frame.  
@@ -142,14 +146,14 @@ Each frame stores the detected keypoints:
 {
   "frame_id": 12,
   "keypoints": [
-    [320.5, 140.2, 0.98], 
-    [330.1, 200.7, 0.95], 
-    [310.9, 250.3, 0.92]
+    [320.5, 140.2], 
+    [330.1, 200.7], 
+    [310.9, 250.3]
   ]
 }
 ```
 
-Where each entry is `[x, y, confidence]`.
+Where each entry is `[x, y]`.
 
 ---
 

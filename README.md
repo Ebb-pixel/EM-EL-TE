@@ -72,6 +72,18 @@ pip install -e .
 
 ---
 
+## 🔗 Download Pretrained Weights & Executable  
+
+- RTMPose-L Underwater model weights:
+- [![Download RTMPose-L](https://img.shields.io/badge/Download-RTMPose--L-blue?style=for-the-badge&logo=google-drive)](https://drive.google.com/uc?export=download&id=1mQsvfwqmI_VVCbJjAS8RbAHE-z94kTEz)  
+- RTMDet Tiny Underwater detector weights:
+- [![Download RTMDet](https://img.shields.io/badge/Download-RTMDet-green?style=for-the-badge&logo=google-drive)](https://drive.google.com/uc?export=download&id=16XoZciKUtFzZoXHsfgBdtinbc0H47dzc)  
+- Standalone Windows executable:
+- [![Download .exe](https://img.shields.io/badge/Download-Windows--Executable-orange?style=for-the-badge&logo=windows)](https://drive.google.com/uc?export=download&id=1vimRGwq2KG98vJqaeZjFHs2gKCD7y1FN)
+- CLI executable:
+- [![Download CLI .exe](https://img.shields.io/badge/Download-CLI--Executable-red?style=for-the-badge&logo=terminal)](https://drive.google.com/uc?export=download&id=1CkEfsQmZG41cTi7Y5JdzUOvDVf2UVfzs)
+
+
 ## 🚀 Training
 
 Run training for **detection** or **pose estimation**.

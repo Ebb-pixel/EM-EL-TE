@@ -1,9 +1,5 @@
 # 🏊‍♂️ Underwater Swimmer Pose Estimation  
 
-![Python](https://img.shields.io/badge/Python-3.9-blue.svg)  
-![Framework](https://img.shields.io/badge/OpenMMLab-MMPose%20%7C%20MMDetection-green)  
-![Torch](https://img.shields.io/badge/PyTorch-2.0-red) 
-
 This project implements a **two-stage pipeline** for underwater swimmer analysis using **RTMDet** (detection) and **RTMPose** (pose estimation).  
 
 1. **Detection (RTMDet):** Locates the swimmer in each frame.  
@@ -98,6 +94,41 @@ python tools/train.py training/configs/underwater/rtmpose-l_underwater.py
 
 > ⚠️ **Important**: Training configs inherit from `_base_` configs inside MMPose & MMDetection.
 > That’s why cloning those repos is required.
+
+---
+
+---
+
+### 📂 Where to place the config files?
+
+After cloning [MMPose](https://github.com/open-mmlab/mmpose) and [MMDetection](https://github.com/open-mmlab/mmdetection):
+
+---
+
+#### 1. Training configs
+
+✅ From this repo:  
+- `training/configs/underwater/rtmpose-l_underwater.py`  
+- `training/configs/underwater/rtmpose-m_underwater.py`  
+- `training/configs/rtmdet_underwater/rtmdet_tiny_1class_underwater.py`  
+
+➡️ Place them here:  
+- `mmpose/configs/underwater/` → for pose configs (`rtmpose-*`)  
+- `mmdetection/configs/rtmdet_underwater/` → for detection config (`rtmdet_tiny_*`)  
+
+⚠️ **Important:**  
+The `underwater/` and `rtmdet_underwater/` folders do **not** exist by default.  
+You must **create them manually** before copying the files.  
+
+---
+
+#### 2. Inference configs (flattened configs)
+
+✅ From this repo:  
+- `inference/configs/rtmpose-l_infer_flat.py`  
+- `inference/configs/rtmdet_tiny_infer_flat.py`  
+
+➡️ Place them inside the **inference folder of your project** (not inside MMPose/MMDetection). 
 
 ---
 
